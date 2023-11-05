@@ -24,20 +24,21 @@
             if (window.history.replaceState) {
                   window.history.replaceState(null, null, window.location.href);
             }
+            document.addEventListener('DOMContentLoaded', function () {
+                  // Wait for the document to be fully loaded
+                  var loginForm = document.getElementById('login-form');
+
+                  loginForm.addEventListener('submit', function (event) {
+                        event.preventDefault(); // Prevent the default form submission
+                        // Now you can perform any other actions you need here
+                  });
+            });
       </script>
+
 </head>
 
 <body>
 
-      <!-- ***** Preloader Start ***** -->
-      <div id="preloader">
-            <div class="jumper">
-                  <div></div>
-                  <div></div>
-                  <div></div>
-            </div>
-      </div>
-      <!-- ***** Preloader End ***** -->
 
       <!-- Header -->
       <header class="">
@@ -113,7 +114,7 @@
                               </div>
                         </div>
                         <div class="col-md-12">
-                              <form action="login.php" method="POST">
+                              <form id="login-form" action="" method="POST" onsubmit="return handleSubmit(event);">
                                     <div class="product-item">
                                           <div class="down-content">
                                                 <div class="form-group">
@@ -126,18 +127,52 @@
                                                       <input type="password" class="form-control" id="password"
                                                             name="password" required>
                                                 </div>
-                                                <button type="submit" class="btn btn-primary">Login</button>
+                                                <br />
+                                                <button class="btn btn-primary" type="submit">Login</button>
                                                 <p class="mt-2">
                                                       <a href="signup.php">Sign Up</a> |
                                                       <a href="forgot_password.php">Forgot Password</a>
                                                 </p>
                                           </div>
                                     </div>
+
                               </form>
                         </div>
                   </div>
             </div>
       </div>
+      <script>
+            function handleSubmit(event) {
+                  event.preventDefault();
+                  fetch('./modules/account/handleLogin.php', {
+                        method: 'POST',
+                        body: new FormData(event.target)
+                  })
+                        .then(response => {
+                              if (!response.ok) {
+                                    throw new Error('Network response was not ok');
+                              }
+                              return response.json();
+                        })
+                        .then(data => {
+                              if (data.id && data.name) {
+                                    sessionStorage.setItem("id", data.id);
+                                    sessionStorage.setItem("name", data.name);
+                              } else if (data.code === "404") {
+                                    console.log("Account's Credential not found");
+                              } else {
+                                    // Handle other response codes as needed
+                                    console.log("Internal Server Error");
+                              }
+                        })
+                        .catch(error => {
+                              console.error("Error:", error);
+                        });
+
+                  return false; // Ensure the form doesn't submit
+            }
+      </script>
+
 
 
       <footer>
@@ -151,7 +186,6 @@
                   </div>
             </div>
       </footer>
-
       <!-- Bootstrap core JavaScript -->
       <script src="vendor/jquery/jquery.min.js"></script>
       <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -160,8 +194,6 @@
       <!-- Additional Scripts -->
       <script src="assets/js/custom.js"></script>
       <script src="assets/js/owl.js"></script>
-      <?php
-      include("./modules/database/conn.php"); ?>
 </body>
 
 </html>

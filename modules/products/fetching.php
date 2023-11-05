@@ -24,6 +24,6 @@ try {
   }
 
 } catch (PDOException $e) {
-  echo "<script>console.log('[$timestamp]: DB CONNECTION FAILED. Error: " . $e->getMessage() . "' );</script>";
+  echo "<script>console.log('[$timestamp]: FETCHING FAILED. Error: " . $e->getMessage() . "' );</script>";
 }
 ?>
