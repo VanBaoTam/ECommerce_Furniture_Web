@@ -128,6 +128,8 @@
                                                             name="password" required>
                                                 </div>
                                                 <br />
+                                                <div id="login-response">
+                                                </div>
                                                 <button class="btn btn-primary" type="submit">Login</button>
                                                 <p class="mt-2">
                                                       <a href="signup.php">Sign Up</a> |
@@ -158,11 +160,10 @@
                               if (data.id && data.name) {
                                     sessionStorage.setItem("id", data.id);
                                     sessionStorage.setItem("name", data.name);
-                              } else if (data.code === "404") {
-                                    console.log("Account's Credential not found");
+                                    window.location.href = "index.php";
                               } else {
-                                    // Handle other response codes as needed
-                                    console.log("Internal Server Error");
+                                    let resp = document.getElementById("login-response");
+                                    resp.innerHTML = `<p style="color: red;">${data.message}</p>`;
                               }
                         })
                         .catch(error => {
@@ -189,7 +190,8 @@
       <!-- Bootstrap core JavaScript -->
       <script src="vendor/jquery/jquery.min.js"></script>
       <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+      <script src="utils/account/Logout.js"></script>
+      <script src="utils/account/Navbar.js"></script>
 
       <!-- Additional Scripts -->
       <script src="assets/js/custom.js"></script>

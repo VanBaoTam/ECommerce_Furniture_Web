@@ -48,30 +48,8 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="index.php">Home
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
+          <ul class="navbar-nav ml-auto" id="nav">
 
-            <li class="nav-item"><a class="nav-link" href="products.php">Products</a></li>
-
-            <li class="nav-item dropdown active">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                aria-expanded="false">More</a>
-
-              <div class="dropdown-menu">
-                <a class="dropdown-item active" href="about-us.php">About Us</a>
-
-
-                <a class="dropdown-item" href="terms.php">Terms</a>
-              </div>
-            </li>
-
-            <li class="nav-item"><a class="nav-link" href="checkout.php">Checkout</a></li>
-
-            <li class="nav-item"><a class="nav-link" href="contact.php">Contact Us</a></li>
           </ul>
         </div>
       </div>
@@ -79,8 +57,7 @@
   </header>
 
   <!-- Page Content -->
-  <div class="page-heading about-heading header-text"
-    style="background-image: url(assets/images/heading.jpg);">
+  <div class="page-heading about-heading header-text" style="background-image: url(assets/images/heading.jpg);">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -172,7 +149,8 @@
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+  <script src="utils/account/Logout.js"></script>
+  <script src="utils/account/Navbar.js"></script>
 
   <!-- Additional Scripts -->
   <script src="assets/js/custom.js"></script>
