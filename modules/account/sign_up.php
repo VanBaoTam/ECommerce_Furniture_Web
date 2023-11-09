@@ -43,7 +43,7 @@ function SignUp($email, $password, $name, $birthday, $phone, $postal, $address)
             $stmt->bindParam(':address', $address);
             $stmt->execute();
 
-            $response = array("code" => "200", "message" => "Signup successful");
+            $response = array("code" => "200", "message" => "Signup successfully");
             return json_encode($response);
 
       } catch (PDOException $e) {

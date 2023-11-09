@@ -24,7 +24,7 @@ function login($email, $password)
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             unset($stmt, $query);
             if ($result) {
-                  $response = array("code" => "200", "message" => "Login successful", "id" => $result["id"], "name" => $result["name"]);
+                  $response = array("code" => "200", "message" => "Login successfully", "id" => $result["id"], "name" => $result["name"]);
                   return json_encode($response);
             } else {
                   $response = array("code" => "404", "message" => "Account's Credential not found");
