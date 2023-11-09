@@ -24,7 +24,9 @@ if (isset($_GET["id"])) {
                 </div>
 
                 <div class="col-md-8 col-xs-12">
-                  <form action="#" method="post" class="form">
+                  <form action="./modules/order/handleAddProduct.php" id="order-form"  class="form" method="POST">
+                  <input type="hidden" name="id" value="1" id="idInput" />
+                  <input type="hidden" name="userId" value="1" id="nameInput" />
                     <h2>' . $product['name'] . '</h2>
                     <br>
                     <p class="lead">
@@ -35,26 +37,17 @@ if (isset($_GET["id"])) {
                     <p class="lead">' . $product['description'] . '</p>
                     <br>
                     <div class="row">
-                      <div class="col-sm-4">
-                        <label class="control-label">Color</label>
-                        <div class="form-group">
-                          <select class="form-control">
-                            <option value="0">Creamy</option>
-                            <option value="1">Midnight</option>
-                            <option value="2">Sky</option>
-                          </select>
-                        </div>
-                      </div>
                       <div class="col-sm-8">
                         <label class="control-label">Quantity</label>
                         <div class="row">
                           <div class="col-sm-6">
                             <div class="form-group">
-                              <input type="number" class="form-control" placeholder="1" min="1" max="' . $product['in_stock'] . '">
+                              <input type="number" name = "quantity" class="form-control" placeholder="1" value="1" min="1" max="' . $product['in_stock'] . '">
                             </div>
                           </div>
                           <div class="col-sm-6">
-                            <a href="#" class="btn btn-primary btn-block">Add to Cart</a>
+                          <div id="order-response"></div>
+                          <button class="btn btn-primary" type="submit">Add to Cart</button>
                           </div>
                         </div>
                       </div>
@@ -77,9 +70,7 @@ if (isset($_GET["id"])) {
                   </div>
                 </div>
                 <div class="col-md-8 col-xs-12">
-                  <form action="#" method="post" class="form">
                     <h2>Product Not Found</h2>
-                  </form>
                   <br>
                   <a href="products.php" style="font-size:30px">Go back</a>
                 </div>

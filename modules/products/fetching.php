@@ -2,7 +2,7 @@
 require_once(__DIR__ . '/../database/conn.php');
 
 try {
-  $query = "SELECT * FROM product JOIN images ON product.id = images.product_id";
+  $query = "SELECT product.id,product.name,product.price,product.discount,product.in_stock,product.description,image FROM product JOIN images ON product.id = images.product_id";
   $stmt = $conn->query($query);
   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
   foreach ($result as $ele) {

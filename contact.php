@@ -24,15 +24,15 @@
     if (window.history.replaceState) {
       window.history.replaceState(null, null, window.location.href);
     }
-    // document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function () {
 
-    //   var loginForm = document.getElementById('contact-form');
+      var loginForm = document.getElementById('contact-form');
 
-    //   loginForm.addEventListener('submit', function (event) {
-    //     event.preventDefault();
+      loginForm.addEventListener('submit', function (event) {
+        event.preventDefault();
 
-    //   });
-    // });
+      });
+    });
   </script>
 </head>
 
@@ -127,7 +127,7 @@
         </div>
         <div class="col-md-12">
           <div class="contact-form">
-            <form id="contact-form" action="./modules/contact/handleContact.php" method="post">
+            <form id="contact-form" action="" method="post" onsubmit="return handleSubmit(event);">
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                   <fieldset>
@@ -144,10 +144,9 @@
                   </fieldset>
                 </div>
                 <div class="col-lg-12">
-                  <fieldset>
-                    <button type="button" id="form-submit" class="filled-button" onclick="submitForm()">Send
-                      Message</button>
-                  </fieldset>
+                  <div id="contact-response">
+                  </div>
+                  <button class="btn btn-primary" type="submit">Send Message</button>
                 </div>
               </div>
             </form>
@@ -160,23 +159,6 @@
               }
               document.getElementById('idInput').value = id;
               document.getElementById('nameInput').value = name;
-
-              function submitForm() {
-                var subject = document.getElementById('subject').value;
-                var message = document.getElementById('message').value;
-
-                if (subject.length < 4 || subject.length > 30) {
-                  alert('Subject length should be between 4 and 30 characters.');
-                  return;
-                }
-
-                if (message.trim() === '') {
-                  alert('Message cannot be empty.');
-                  return;
-                }
-
-                document.getElementById('contact-form').submit();
-              }
             </script>
 
           </div>
@@ -195,7 +177,13 @@
                 return response.json();
               })
               .then(data => {
-                console.log(data);
+                if (data.code === "200") {
+                  let resp = document.getElementById("contact-response");
+                  resp.innerHTML = `<p style="color: green;">${data.message}</p> <br>`;
+                } else {
+                  let resp = document.getElementById("contact-response");
+                  resp.innerHTML = `<p style="color: red;">${data.message}</p> <br>`;
+                }
               })
               .catch(error => {
                 console.error("Error:", error);

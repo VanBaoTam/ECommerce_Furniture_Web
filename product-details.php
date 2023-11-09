@@ -18,6 +18,20 @@
   <link rel="stylesheet" href="assets/css/fontawesome.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/owl.css">
+  <script>
+    if (window.history.replaceState) {
+      window.history.replaceState(null, null, window.location.href);
+    }
+    // document.addEventListener('DOMContentLoaded', function () {
+
+    //   var loginForm = document.getElementById('order-form');
+
+    //   loginForm.addEventListener('submit', function (event) {
+    //     event.preventDefault();
+
+    //   });
+    // });
+  </script>
 
 </head>
 
@@ -78,39 +92,6 @@
             <a href="products.php">view more <i class="fa fa-angle-right"></i></a>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="product-item">
-            <a href="product-details.php?id=4"><img src="assets/images/product-4-370x270.jpg" alt=""></a>
-            <div class="down-content">
-              <a href="product-details.php">
-                <h4>Green Wool Couch.</h4>
-              </a>
-              <h6><small><del>$999.00 </del></small> $779.00</h6>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="product-item">
-            <a href="product-details.php?id=2"><img src="assets/images/product-2-370x270.jpg" alt=""></a>
-            <div class="down-content">
-              <a href="product-details.php">
-                <h4>Light Pink Armchair.</h4>
-              </a>
-              <h6><small><del>$200.00</del></small> $149.00</h6>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="product-item">
-            <a href="product-details.php?id=3"><img src="assets/images/product-3-370x270.jpg" alt=""></a>
-            <div class="down-content">
-              <a href="product-details.php">
-                <h4>Oak Stool.</h4>
-              </a>
-              <h6><small><del>$80.00</del></small> $49.00</h6>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -127,68 +108,37 @@
     </div>
   </footer>
 
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Book Now</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="contact-form">
-            <form action="#" id="contact">
-              <div class="row">
-                <div class="col-md-6">
-                  <fieldset>
-                    <input type="text" class="form-control" placeholder="Pick-up location" required="">
-                  </fieldset>
-                </div>
-                <div class="col-md-6">
-                  <fieldset>
-                    <input type="text" class="form-control" placeholder="Return location" required="">
-                  </fieldset>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <fieldset>
-                    <input type="text" class="form-control" placeholder="Pick-up date/time" required="">
-                  </fieldset>
-                </div>
-                <div class="col-md-6">
-                  <fieldset>
-                    <input type="text" class="form-control" placeholder="Return date/time" required="">
-                  </fieldset>
-                </div>
-              </div>
-              <input type="text" class="form-control" placeholder="Enter full name" required="">
-              <div class="row">
-                <div class="col-md-6">
-                  <fieldset>
-                    <input type="text" class="form-control" placeholder="Enter email address" required="">
-                  </fieldset>
-                </div>
-                <div class="col-md-6">
-                  <fieldset>
-                    <input type="text" class="form-control" placeholder="Enter phone" required="">
-                  </fieldset>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary">Book Now</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <script>
+    function handleSubmit(event) {
+      event.preventDefault();
+      var id = sessionStorage.getItem('id');
+      var name = sessionStorage.getItem('name');
+      if (!id || !name) {
+        window.location.href = 'login.php';
+      }
+      document.getElementById('idInput').value = id;
+      document.getElementById('nameInput').value = name;
+      console.log(new FormData(event.target));
+      fetch('./modules/order/addProduct.php', {
+        method: 'POST',
+        body: new FormData(event.target)
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log(data)
+        })
+        .catch(error => {
+          console.error("Error:", error);
+        });
 
+      return false; // Ensure the form doesn't submit
+    }
+  </script>
 
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
