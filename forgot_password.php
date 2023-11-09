@@ -62,27 +62,15 @@
 
       <!-- Page Content -->
       <!-- Banner Starts Here -->
-      <div class="banner header-text">
-            <div class="owl-banner owl-carousel">
-                  <div class="banner-item-01">
-                        <div class="text-content">
-                              <h4>Let's decorate your house!</h4>
-                              <h2>Chairable</h2>
-                              <h2> The Best Furniture's Shop</h2>
-                        </div>
-                  </div>
-                  <div class="banner-item-02">
-                        <div class="text-content">
-                              <h4>Let's decorate your house!</h4>
-                              <h2>Chairable</h2>
-                              <h2> The Best Furniture's Shop</h2>
-                        </div>
-                  </div>
-                  <div class="banner-item-03">
-                        <div class="text-content">
-                              <h4>Let's decorate your house!</h4>
-                              <h2>Chairable</h2>
-                              <h2> The Best Furniture's Shop</h2>
+      <div class="page-heading contact-heading header-text" style="background-image: url(assets/images/heading.jpg);">
+            <div class="container">
+                  <div class="row">
+                        <div class="col-md-12">
+                              <div class="text-content">
+                                    <h4>Let's decorate your house!
+                                    </h4>
+                                    <h2>Forgot Password</h2>
+                              </div>
                         </div>
                   </div>
             </div>

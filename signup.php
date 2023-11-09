@@ -24,6 +24,15 @@
             if (window.history.replaceState) {
                   window.history.replaceState(null, null, window.location.href);
             }
+            document.addEventListener('DOMContentLoaded', function () {
+
+                  var loginForm = document.getElementById('signup-form');
+
+                  loginForm.addEventListener('submit', function (event) {
+                        event.preventDefault();
+
+                  });
+            });
       </script>
 </head>
 
@@ -62,27 +71,15 @@
 
       <!-- Page Content -->
       <!-- Banner Starts Here -->
-      <div class="banner header-text">
-            <div class="owl-banner owl-carousel">
-                  <div class="banner-item-01">
-                        <div class="text-content">
-                              <h4>Let's decorate your house!</h4>
-                              <h2>Chairable</h2>
-                              <h2> The Best Furniture's Shop</h2>
-                        </div>
-                  </div>
-                  <div class="banner-item-02">
-                        <div class="text-content">
-                              <h4>Let's decorate your house!</h4>
-                              <h2>Chairable</h2>
-                              <h2> The Best Furniture's Shop</h2>
-                        </div>
-                  </div>
-                  <div class="banner-item-03">
-                        <div class="text-content">
-                              <h4>Let's decorate your house!</h4>
-                              <h2>Chairable</h2>
-                              <h2> The Best Furniture's Shop</h2>
+      <div class="page-heading contact-heading header-text" style="background-image: url(assets/images/heading.jpg);">
+            <div class="container">
+                  <div class="row">
+                        <div class="col-md-12">
+                              <div class="text-content">
+                                    <h4>Let's decorate your house!
+                                    </h4>
+                                    <h2>Sign Up</h2>
+                              </div>
                         </div>
                   </div>
             </div>
@@ -97,13 +94,13 @@
                               </div>
                         </div>
                         <div class="col-md-12">
-                              <form action="signup.php" method="POST">
+                              <form id="signup-form" action="" method="POST" onsubmit="return handleSubmit(event);">
                                     <div class="product-item">
                                           <div class="down-content">
                                                 <div class="form-group">
-                                                      <label for="username">Username:</label>
-                                                      <input type="text" class="form-control" id="username"
-                                                            name="username" required>
+                                                      <label for="name">Name:</label>
+                                                      <input type="text" class="form-control" id="name" name="name"
+                                                            required>
                                                 </div>
                                                 <div class="form-group">
                                                       <label for="email">Email:</label>
@@ -115,15 +112,70 @@
                                                       <input type="password" class="form-control" id="password"
                                                             name="password" required>
                                                 </div>
+                                                <div class="form-group">
+                                                      <label for="birthday">Birthday:</label>
+                                                      <input type="Date" class="form-control" id="birthday"
+                                                            name="birthday" required>
+                                                </div>
+                                                <div class="form-group">
+                                                      <label for="phone">Phone number:</label>
+                                                      <input type="text" class="form-control" id="phone" name="phone"
+                                                            required>
+                                                </div>
+                                                <div class="form-group">
+                                                      <label for="address">Address:</label>
+                                                      <input type="text" class="form-control" id="address"
+                                                            name="address" required>
+                                                </div>
+                                                <div class="form-group">
+                                                      <label for="postal">Zip Postal:</label>
+                                                      <input type="text" class="form-control" id="postal" name="postal"
+                                                            required>
+                                                </div>
+                                                <div id="signup-response"></div>
                                                 <button type="submit" class="btn btn-primary">Sign Up</button>
                                           </div>
                                     </div>
                               </form>
+
                         </div>
                   </div>
             </div>
       </div>
 
+      <script>
+            function handleSubmit(event) {
+                  event.preventDefault();
+                  fetch('./modules/account/handleSignup.php', {
+                        method: 'POST',
+                        body: new FormData(event.target)
+                  })
+                        .then(response => {
+                              if (!response.ok) {
+                                    throw new Error('Network response was not ok');
+                              }
+
+                              return response.json();
+                        })
+                        .then(data => {
+                              if (data.code === "200") {
+                                    let resp = document.getElementById("signup-response");
+                                    resp.innerHTML = `<p style="color: green;">${data.message}</p>`;
+                                    setTimeout(() => {
+                                          window.location.href = "login.php";
+                                    }, 5000);
+                              } else {
+                                    let resp = document.getElementById("signup-response");
+                                    resp.innerHTML = `<p style="color: red;">${data.message}</p>`;
+                              }
+                        })
+                        .catch(error => {
+                              console.error("Error:", error);
+                        });
+
+                  return false; // Ensure the form doesn't submit
+            }
+      </script>
 
 
       <footer>
@@ -143,7 +195,6 @@
       <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
       <script src="utils/account/Logout.js"></script>
       <script src="utils/account/Navbar.js"></script>
-
       <!-- Additional Scripts -->
       <script src="assets/js/custom.js"></script>
       <script src="assets/js/owl.js"></script>

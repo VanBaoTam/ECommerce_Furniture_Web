@@ -25,12 +25,12 @@
                   window.history.replaceState(null, null, window.location.href);
             }
             document.addEventListener('DOMContentLoaded', function () {
-                  // Wait for the document to be fully loaded
+
                   var loginForm = document.getElementById('login-form');
 
                   loginForm.addEventListener('submit', function (event) {
-                        event.preventDefault(); // Prevent the default form submission
-                        // Now you can perform any other actions you need here
+                        event.preventDefault();
+
                   });
             });
       </script>
@@ -53,53 +53,24 @@
                               <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarResponsive">
-                              <ul class="navbar-nav ml-auto">
-                                    <li class="nav-item">
-                                          <a class="nav-link" href="index.php">Home
-                                                <span class="sr-only">(current)</span>
-                                          </a>
-                                    </li>
-                                    <li class="nav-item"><a class="nav-link" href="products.php">Products</a></li>
-                                    <li class="nav-item dropdown">
-                                          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-                                                role="button" aria-haspopup="true" aria-expanded="false">More</a>
-                                          <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="about-us.php">About Us</a>
-                                                <a class="dropdown-item" href="terms.php">Terms</a>
-                                          </div>
-                                    </li>
-                                    <li class="nav-item"><a class="nav-link" href="checkout.php">Checkout</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="contact.php">Contact Us</a></li>
-                                    <li class="nav-item active"><a class="nav-link" href="login.php">Login</a></li>
+                              <ul class="navbar-nav ml-auto" id="nav">
+
                               </ul>
                         </div>
                   </div>
             </nav>
       </header>
-
       <!-- Page Content -->
       <!-- Banner Starts Here -->
-      <div class="banner header-text">
-            <div class="owl-banner owl-carousel">
-                  <div class="banner-item-01">
-                        <div class="text-content">
-                              <h4>Let's decorate your house!</h4>
-                              <h2>Chairable</h2>
-                              <h2> The Best Furniture's Shop</h2>
-                        </div>
-                  </div>
-                  <div class="banner-item-02">
-                        <div class="text-content">
-                              <h4>Let's decorate your house!</h4>
-                              <h2>Chairable</h2>
-                              <h2> The Best Furniture's Shop</h2>
-                        </div>
-                  </div>
-                  <div class="banner-item-03">
-                        <div class="text-content">
-                              <h4>Let's decorate your house!</h4>
-                              <h2>Chairable</h2>
-                              <h2> The Best Furniture's Shop</h2>
+      <div class="page-heading contact-heading header-text" style="background-image: url(assets/images/heading.jpg);">
+            <div class="container">
+                  <div class="row">
+                        <div class="col-md-12">
+                              <div class="text-content">
+                                    <h4>Let's decorate your house!
+                                    </h4>
+                                    <h2>Login</h2>
+                              </div>
                         </div>
                   </div>
             </div>
@@ -173,9 +144,6 @@
                   return false; // Ensure the form doesn't submit
             }
       </script>
-
-
-
       <footer>
             <div class="container">
                   <div class="row">
