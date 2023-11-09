@@ -69,15 +69,9 @@ if (isset($_GET["id"])) {
             <div class="container">
               <div class="row">
                 <div class="col-md-4 col-xs-12">
-                  <div>
-                    <img src="assets/images/product-1-370x270.jpg" alt="" class="img-fluid wc-image">
-                  </div>
                   <br>
                   <div class="row">
                     <div class="col-sm-4 col-xs-6">
-                      <div>
-                        <img src="assets/images/product-1-370x270.jpg" alt="" class="img-fluid">
-                      </div>
                       <br>
                     </div>
                   </div>
@@ -86,13 +80,14 @@ if (isset($_GET["id"])) {
                   <form action="#" method="post" class="form">
                     <h2>Product Not Found</h2>
                   </form>
+                  <br>
+                  <a href="products.php" style="font-size:30px">Go back</a>
                 </div>
               </div>
             </div>
           </div>';
   }
 } else {
-  // Your existing code for when id is not set
-  echo '<div class="products">...</div>';
+  echo '<script> window.location.href = "products.php";</script>';
 }
 ?>
