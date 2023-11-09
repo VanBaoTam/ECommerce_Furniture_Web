@@ -11,9 +11,9 @@ try {
     $discount = $ele["discount"] * $ele["price"] / 100;
     echo '<div class="col-md-4">
         <div class="product-item">
-          <a href="product-details.php"><img src="' . $imageSrc . '" alt=""></a>
+          <a href="product-details.php?id=' . $ele['id'] . '"><img src="' . $imageSrc . '" alt=""></a>
           <div class="down-content">
-            <a href="product-details.php">
+            <a href="product-details.php?id=' . $ele['id'] . '">
               <h4>' . $ele['name'] . '</h4>
             </a>
             <h6><small><del>$' . $ele['price'] . '</del></small> $' . $discount . '</h6>

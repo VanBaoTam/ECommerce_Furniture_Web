@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="assets/css/fontawesome.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/owl.css">
+
 </head>
 
 <body>
@@ -64,80 +65,9 @@
       </div>
     </div>
   </div>
-
-  <div class="products">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4 col-xs-12">
-          <div>
-            <img src="assets/images/product-1-370x270.jpg" alt="" class="img-fluid wc-image">
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-sm-4 col-xs-6">
-              <div>
-                <img src="assets/images/product-1-370x270.jpg" alt="" class="img-fluid">
-              </div>
-              <br>
-            </div>
-            <div class="col-sm-4 col-xs-6">
-              <div>
-                <img src="assets/images/product-2-370x270.jpg" alt="" class="img-fluid">
-              </div>
-              <br>
-            </div>
-            <div class="col-sm-4 col-xs-6">
-              <div>
-                <img src="assets/images/product-3-370x270.jpg" alt="" class="img-fluid">
-              </div>
-              <br>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-8 col-xs-12">
-          <form action="#" method="post" class="form">
-            <h2>Creamy Armchair.</h2>
-            <br>
-            <p class="lead">
-              <small><del> $399.00</del></small><strong class="text-primary">$299.00</strong>
-            </p>
-            <br>
-            <p class="lead">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi ratione molestias maxime odio.
-              Provident ratione vero, corrupti, optio laborum aut!
-            </p>
-            <br>
-            <div class="row">
-              <div class="col-sm-4">
-                <label class="control-label">Color</label>
-                <div class="form-group">
-                  <select class="form-control">
-                    <option value="0">Creamy</option>
-                    <option value="1">Midnight</option>
-                    <option value="2">Sky</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-sm-8">
-                <label class="control-label">Quantity</label>
-                <div class="row">
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder="1">
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <a href="#" class="btn btn-primary btn-block">Add to Cart</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
+  <?php
+  include("./modules/products/handleGetDetail.php");
+  ?>
 
   <div class="latest-products">
     <div class="container">
@@ -150,7 +80,7 @@
         </div>
         <div class="col-md-4">
           <div class="product-item">
-            <a href="product-details.php"><img src="assets/images/product-4-370x270.jpg" alt=""></a>
+            <a href="product-details.php?id=4"><img src="assets/images/product-4-370x270.jpg" alt=""></a>
             <div class="down-content">
               <a href="product-details.php">
                 <h4>Green Wool Couch.</h4>
@@ -161,7 +91,7 @@
         </div>
         <div class="col-md-4">
           <div class="product-item">
-            <a href="product-details.php"><img src="assets/images/product-2-370x270.jpg" alt=""></a>
+            <a href="product-details.php?id=2"><img src="assets/images/product-2-370x270.jpg" alt=""></a>
             <div class="down-content">
               <a href="product-details.php">
                 <h4>Light Pink Armchair.</h4>
@@ -172,7 +102,7 @@
         </div>
         <div class="col-md-4">
           <div class="product-item">
-            <a href="product-details.php"><img src="assets/images/product-3-370x270.jpg" alt=""></a>
+            <a href="product-details.php?id=3"><img src="assets/images/product-3-370x270.jpg" alt=""></a>
             <div class="down-content">
               <a href="product-details.php">
                 <h4>Oak Stool.</h4>
