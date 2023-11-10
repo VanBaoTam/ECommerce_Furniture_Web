@@ -77,7 +77,11 @@
                </ul>
 
                <br>
-               <div id="cart" style="display:flex;flex-wrap:wrap;"></div>
+               <div id="cart-response">
+               </div>
+               <div id="cart" style="display:flex;flex-wrap:wrap;">
+
+               </div>
                <div class="inner-content">
                     <div class="contact-form">
                          <form action="#">
@@ -181,6 +185,8 @@
                          .then(data => {
                               console.log(data);
                               if (data.length > 0) {
+                                   let costFixed = Number((data[0].cost)).toFixed(2);
+                                   let totalFixed = Number((data[0].inTotal)).toFixed(2);
                                    let billForm = document.getElementById("bill");
                                    billForm.innerHTML = `
                               <li class="list-group-item">
@@ -190,7 +196,7 @@
                               </div>
 
                               <div class="col-6 text-right">
-                                   <strong>$ ${data[0].cost}</strong>
+                                   <strong>$ ${costFixed}</strong>
                               </div>
                          </div>
                     </li>
@@ -226,7 +232,7 @@
                               </div>
 
                               <div class="col-6 text-right">
-                                   <strong>$ ${data[0].inTotal}</strong>
+                                   <strong>$ ${totalFixed}</strong>
                               </div>
                          </div>
                     </li>`;
@@ -244,7 +250,7 @@
               <p class="cart-bill">Discount: ${item.discount}%</p>
               <p class="cart-bill">Quantity: ${item.quantity}</p>
               <p class="cart-bill">Total: $${totalPrice}  </p>
-              <button class="btn btn-danger" onclick="removeItem('${item.name}')">Remove</button>
+              <button class="btn btn-danger" onclick="removeItem('${item.productId}')">Remove</button>
             </div>
           </div>
         `;
@@ -317,6 +323,45 @@
                     sendPost(url, data);
                }
           });
+     </script>
+     <script>
+          function removeItem(productId) {
+               let userId = sessionStorage.getItem("id");
+               event.preventDefault();
+               let formData = new FormData();
+               formData.append("userId", userId);
+               formData.append("productId", productId);
+
+               fetch('./modules/order/handleRemoveProduct.php', {
+                    method: 'POST',
+                    body: formData
+               })
+                    .then(response => {
+                         if (!response.ok) {
+                              throw new Error('Network response was not ok');
+                         }
+                         return response.json();
+                    })
+                    .then(data => {
+                         if (data.code === "200") {
+                              let resp = document.getElementById("cart-response");
+                              resp.innerHTML = `<p style="color: green;">${data.message}</p>`;
+                              setTimeout(() => {
+                                   window.location.reload();
+                              }, 4000);
+                         } else {
+                              let resp = document.getElementById("cart-response");
+                              resp.innerHTML = `<p style="color: red;">${data.message}</p>`;
+                         }
+
+                    })
+                    .catch(error => {
+                         console.error("Error:", error);
+                    });
+
+               return false; // Ensure the form doesn't submit
+          }
+
      </script>
      <!-- Bootstrap core JavaScript -->
      <script src="vendor/jquery/jquery.min.js"></script>

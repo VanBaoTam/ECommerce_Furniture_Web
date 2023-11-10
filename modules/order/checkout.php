@@ -21,7 +21,7 @@ function fetchingCart($id, $name)
                   return json_encode($response);
             }
 
-            $orderQuery = "SELECT cost, inTotal, shipment_fee, other_fee, product.name,product.price, product.discount, productordermapping.quantity  
+            $orderQuery = "SELECT product.id as productId, cost, inTotal, shipment_fee, other_fee, product.name,product.price, product.discount, productordermapping.quantity  
             FROM orders 
             JOIN productordermapping ON orders.id = productordermapping.order_id 
             JOIN user ON user.id = orders.user_id
