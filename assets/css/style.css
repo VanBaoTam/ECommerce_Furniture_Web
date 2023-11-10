@@ -265,7 +265,6 @@ header .navbar {
 .navbar .navbar-nav .show>.nav-link {
 	color: #fff;
 	padding-bottom: 25px;
-	border-bottom: 3px solid #f33f3f;
 }
 .navbar .navbar-toggler-icon {
 	background-image: none;
@@ -988,7 +987,49 @@ footer .inner-content p a {
 	margin-bottom: 45px;
 }
 
-
+.cart-bill {
+	 font-size: 20px;
+	 border-radius:8px;
+	 border-color: #1e1e1e;
+}
+.card {
+	 margin-top:1rem;
+}
+.card-body {
+	width: 300px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	padding: 20px;
+	margin: 10px;
+  }
+  
+  .card-title {
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 10px;
+  }
+  
+  .cart-bill {
+	font-size: 16px;
+	margin-bottom: 5px;
+  }
+  
+  .btn-danger {
+	background-color: #dc3545;
+	color: #fff;
+	border: none;
+	padding: 5px 10px;
+	cursor: pointer;
+	border-radius: 5px;
+	transition: background-color 0.3s;
+  }
+  
+  .btn-danger:hover {
+	background-color: #bd2130;
+  }
+  
 /* Responsive Style */
 @media (max-width: 768px) {
 	.banner .text-content {

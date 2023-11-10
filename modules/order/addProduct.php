@@ -27,10 +27,6 @@ function addProduct($id, $user_id, $quantity)
                   return json_encode($response);
             }
 
-
-
-
-
             $orderQuery = "SELECT * FROM orders WHERE user_id = :user_id AND paid = 0";
             $orderStmt = $conn->prepare($orderQuery);
             $orderStmt->bindParam(':user_id', $user_id);
@@ -43,9 +39,6 @@ function addProduct($id, $user_id, $quantity)
                   $orderInsertStmt->bindParam(':user_id', $user_id);
                   $orderInsertStmt->execute();
             }
-
-
-
 
             $orderQuery = "SELECT * FROM orders WHERE user_id = :user_id AND paid = 0";
             $orderStmt = $conn->prepare($orderQuery);
@@ -60,23 +53,37 @@ function addProduct($id, $user_id, $quantity)
             $updateProductStmt->bindParam(':quantity', $quantity);
             $updateProductStmt->execute();
 
+            $existProductQuery = "SELECT * FROM `productordermapping` WHERE product_id = :id AND order_id = :order_id";
+            $existProductStmt = $conn->prepare($existProductQuery);
+            $existProductStmt->bindParam(':id', $id);
+            $existProductStmt->bindParam(':order_id', $orderResult["id"]);
+            $existProductStmt->execute();
+            $existProductResult = $existProductStmt->fetch(PDO::FETCH_ASSOC);
+            if ($existProductResult) {
 
+                  $updateProductOrderQuery = "UPDATE `productordermapping` SET quantity = quantity + :quantity WHERE product_id = :id AND order_id = :order_id";
+                  $updateProductOrderStmt = $conn->prepare($updateProductOrderQuery);
+                  $updateProductOrderStmt->bindParam(':id', $id);
+                  $updateProductOrderStmt->bindParam(':order_id', $orderResult["id"]);
+                  $updateProductOrderStmt->bindParam(':quantity', $quantity);
+                  $updateProductOrderStmt->execute();
 
+            } else {
 
-
-            $productOrderQuery = "INSERT INTO `productordermapping` (product_id, order_id, quantity) VALUES (:id,:order_id,:quantity)";
-            $productOrderStmt = $conn->prepare($productOrderQuery);
-            $productOrderStmt->bindParam(':id', $id);
-            $productOrderStmt->bindParam(':order_id', $orderResult["id"]);
-            $productOrderStmt->bindParam(':quantity', $quantity);
-            $productOrderStmt->execute();
+                  $productOrderQuery = "INSERT INTO `productordermapping` (product_id, order_id, quantity) VALUES (:id,:order_id,:quantity)";
+                  $productOrderStmt = $conn->prepare($productOrderQuery);
+                  $productOrderStmt->bindParam(':id', $id);
+                  $productOrderStmt->bindParam(':order_id', $orderResult["id"]);
+                  $productOrderStmt->bindParam(':quantity', $quantity);
+                  $productOrderStmt->execute();
+            }
 
 
             // Calculate the total price after discount
             $totalPrice = $quantity * ($productResult["price"] - ($productResult["price"] * $productResult["discount"] / 100));
             $totalPrice = round($totalPrice, 2);
             // Update the order with the calculated total price
-            $updateOrderQuery = "UPDATE orders SET cost = cost + :totalPrice, inTotal = inTotal + cost WHERE user_id = :user_id AND paid = 0";
+            $updateOrderQuery = "UPDATE orders SET cost = cost + :totalPrice, inTotal = inTotal + :totalPrice WHERE user_id = :user_id AND paid = 0";
             $updateOrderStmt = $conn->prepare($updateOrderQuery);
             $updateOrderStmt->bindParam(':user_id', $user_id);
             $updateOrderStmt->bindParam(':totalPrice', $totalPrice);

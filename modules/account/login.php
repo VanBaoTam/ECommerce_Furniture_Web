@@ -22,7 +22,6 @@ function login($email, $password)
             $stmt->bindParam(':password', $password);
             $stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            unset($stmt, $query);
             if ($result) {
                   $response = array("code" => "200", "message" => "Login successfully", "id" => $result["id"], "name" => $result["name"]);
                   return json_encode($response);

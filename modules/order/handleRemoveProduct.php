@@ -1,7 +1,7 @@
 <?php
-if (isset($_POST["id"]) && isset($_POST["userId"]) && isset($_POST["quantity"])) {
+if (isset($_POST["id"]) && isset($_POST["userId"]) && isset($_POST["productId"])) {
 
-      require_once("addProduct.php");
+      require_once("removeProduct.php");
       $result = addProduct($_POST["id"], $_POST["userId"], $_POST["quantity"]);
       echo $result;
 } else {

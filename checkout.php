@@ -73,70 +73,11 @@
 
      <div class="products call-to-action">
           <div class="container">
-               <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                         <div class="row">
-                              <div class="col-6">
-                                   <em>Sub-total</em>
-                              </div>
-
-                              <div class="col-6 text-right">
-                                   <strong>$ 0.00</strong>
-                              </div>
-                         </div>
-                    </li>
-
-                    <li class="list-group-item">
-                         <div class="row">
-                              <div class="col-6">
-                                   <em>Extra</em>
-                              </div>
-
-                              <div class="col-6 text-right">
-                                   <strong>$ 0.00</strong>
-                              </div>
-                         </div>
-                    </li>
-
-                    <li class="list-group-item">
-                         <div class="row">
-                              <div class="col-6">
-                                   <em>Tax</em>
-                              </div>
-
-                              <div class="col-6 text-right">
-                                   <strong>$ 0.00</strong>
-                              </div>
-                         </div>
-                    </li>
-
-                    <li class="list-group-item">
-                         <div class="row">
-                              <div class="col-6">
-                                   <em>Total</em>
-                              </div>
-
-                              <div class="col-6 text-right">
-                                   <strong>$ 0.00</strong>
-                              </div>
-                         </div>
-                    </li>
-
-                    <li class="list-group-item">
-                         <div class="row">
-                              <div class="col-6">
-                                   <em>Deposit payment required</em>
-                              </div>
-
-                              <div class="col-6 text-right">
-                                   <strong>$ 0.00</strong>
-                              </div>
-                         </div>
-                    </li>
+               <ul class="list-group list-group-flush" id="bill">
                </ul>
 
                <br>
-
+               <div id="cart" style="display:flex;flex-wrap:wrap;"></div>
                <div class="inner-content">
                     <div class="contact-form">
                          <form action="#">
@@ -219,7 +160,164 @@
                </div>
           </div>
      </footer>
+     <script>
+          var id = sessionStorage.getItem('id');
+          var name = sessionStorage.getItem('name');
+          if (!id || !name) {
+               window.location.href = 'login.php';
+          }
+     </script>
+     <script>
+          document.addEventListener("DOMContentLoaded", function () {
+               function sendPost(url, data) {
+                    fetch(url, {
+                         method: 'POST',
+                         headers: {
+                              'Content-Type': 'application/x-www-form-urlencoded',
+                         },
+                         body: new URLSearchParams(data),
+                    })
+                         .then(response => response.json())
+                         .then(data => {
+                              console.log(data);
+                              if (data.length > 0) {
+                                   let billForm = document.getElementById("bill");
+                                   billForm.innerHTML = `
+                              <li class="list-group-item">
+                         <div class="row">
+                              <div class="col-6">
+                                   <em>Cost</em>
+                              </div>
 
+                              <div class="col-6 text-right">
+                                   <strong>$ ${data[0].cost}</strong>
+                              </div>
+                         </div>
+                    </li>
+
+                    <li class="list-group-item">
+                         <div class="row">
+                              <div class="col-6">
+                                   <em>Shipment fee</em>
+                              </div>
+
+                              <div class="col-6 text-right">
+                                   <strong>$ ${data[0].shipment_fee}</strong>
+                              </div>
+                         </div>
+                    </li>
+
+                    <li class="list-group-item">
+                         <div class="row">
+                              <div class="col-6">
+                                   <em>Other fee </em>
+                              </div>
+
+                              <div class="col-6 text-right">
+                                   <strong>$ ${data[0].other_fee}</strong>
+                              </div>
+                         </div>
+                    </li>
+
+                    <li class="list-group-item">
+                         <div class="row">
+                              <div class="col-6">
+                                   <em>Total</em>
+                              </div>
+
+                              <div class="col-6 text-right">
+                                   <strong>$ ${data[0].inTotal}</strong>
+                              </div>
+                         </div>
+                    </li>`;
+                                   let cart = document.getElementById('cart');
+                                   data.forEach(item => {
+                                        let card = document.createElement('div');
+                                        card.classList.add('col-md-4');
+                                        let totalPrice = (item.quantity * (item.price - item.price * item.discount / 100)).toFixed(2);
+
+                                        card.innerHTML = `
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">${item.name}</h5>
+              <p class="cart-bill">Price: $${item.price}</p>
+              <p class="cart-bill">Discount: ${item.discount}%</p>
+              <p class="cart-bill">Quantity: ${item.quantity}</p>
+              <p class="cart-bill">Total: $${totalPrice}  </p>
+              <button class="btn btn-danger" onclick="removeItem('${item.name}')">Remove</button>
+            </div>
+          </div>
+        `;
+
+                                        cart.appendChild(card);
+                                   });
+                              }
+                              else {
+                                   let billForm = document.getElementById("bill");
+                                   billForm.innerHTML = `
+                                   <li class="list-group-item">
+                         <div class="row">
+                              <div class="col-6">
+                                   <em>Cost</em>
+                              </div>
+
+                              <div class="col-6 text-right">
+                                   <strong>$ 0.00</strong>
+                              </div>
+                         </div>
+                    </li>
+
+                    <li class="list-group-item">
+                         <div class="row">
+                              <div class="col-6">
+                                   <em>Shipment fee</em>
+                              </div>
+
+                              <div class="col-6 text-right">
+                                   <strong>$ 0.00</strong>
+                              </div>
+                         </div>
+                    </li>
+
+                    <li class="list-group-item">
+                         <div class="row">
+                              <div class="col-6">
+                                   <em>Other fee</em>
+                              </div>
+
+                              <div class="col-6 text-right">
+                                   <strong>$ 0.00</strong>
+                              </div>
+                         </div>
+                    </li>
+
+                    <li class="list-group-item">
+                         <div class="row">
+                              <div class="col-6">
+                                   <em>Total</em>
+                              </div>
+
+                              <div class="col-6 text-right">
+                                   <strong>$ 0.00</strong>
+                              </div>
+                         </div>
+                    </li>
+`
+                              }
+                         })
+                         .catch((error) => {
+                              console.error('Error:', error);
+                         });
+               }
+               let id = sessionStorage.getItem('id');
+               let name = sessionStorage.getItem('name');
+               if (id && name) {
+                    let url = './modules/order/handleCheckout.php';
+                    let data = { id: id, name: name };
+                    sendPost(url, data);
+               }
+          });
+     </script>
      <!-- Bootstrap core JavaScript -->
      <script src="vendor/jquery/jquery.min.js"></script>
      <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

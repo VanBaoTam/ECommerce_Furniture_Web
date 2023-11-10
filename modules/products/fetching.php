@@ -8,7 +8,7 @@ try {
   foreach ($result as $ele) {
     $imageData = base64_encode($ele['image']);
     $imageSrc = 'data:image/jpeg;base64,' . $imageData;
-    $discount = $ele["discount"] * $ele["price"] / 100;
+    $discount = $ele['price'] - ($ele['discount'] * $ele['price'] / 100);
     echo '<div class="col-md-4">
         <div class="product-item">
           <a href="product-details.php?id=' . $ele['id'] . '"><img src="' . $imageSrc . '" alt=""></a>

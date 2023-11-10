@@ -22,15 +22,15 @@
     if (window.history.replaceState) {
       window.history.replaceState(null, null, window.location.href);
     }
-    // document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function () {
 
-    //   var loginForm = document.getElementById('order-form');
+      var loginForm = document.getElementById('order-form');
 
-    //   loginForm.addEventListener('submit', function (event) {
-    //     event.preventDefault();
+      loginForm.addEventListener('submit', function (event) {
+        event.preventDefault();
 
-    //   });
-    // });
+      });
+    });
   </script>
 
 </head>
@@ -110,16 +110,15 @@
 
   <script>
     function handleSubmit(event) {
-      event.preventDefault();
-      var id = sessionStorage.getItem('id');
-      var name = sessionStorage.getItem('name');
-      if (!id || !name) {
+      let url = new URL(window.location.href);
+      let id = url.searchParams.get("id")
+      let userId = sessionStorage.getItem('id');
+      if (!id || !userId) {
         window.location.href = 'login.php';
       }
       document.getElementById('idInput').value = id;
-      document.getElementById('nameInput').value = name;
-      console.log(new FormData(event.target));
-      fetch('./modules/order/addProduct.php', {
+      document.getElementById('userIdInput').value = userId;
+      fetch('./modules/order/handleAddProduct.php', {
         method: 'POST',
         body: new FormData(event.target)
       })
@@ -130,7 +129,14 @@
           return response.json();
         })
         .then(data => {
-          console.log(data)
+          console.log(data);
+          if (data.code === "200") {
+            let resp = document.getElementById("order-response");
+            resp.innerHTML = `<p style="color: green;">${data.message}</p>`;
+          } else {
+            let resp = document.getElementById("order-response");
+            resp.innerHTML = `<p style="color: red;">${data.message}</p>`;
+          }
         })
         .catch(error => {
           console.error("Error:", error);
