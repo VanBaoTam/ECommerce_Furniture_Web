@@ -11,7 +11,7 @@ function addProduct($id, $user_id, $quantity)
       try {
 
 
-            // Use prepared statements to prevent SQL injection
+
             $query = "SELECT in_stock, price, discount FROM product WHERE id = :id";
             $stmt = $conn->prepare($query);
             $stmt->bindParam(':id', $id);
@@ -46,7 +46,6 @@ function addProduct($id, $user_id, $quantity)
             $orderStmt->execute();
             $orderResult = $orderStmt->fetch(PDO::FETCH_ASSOC);
 
-            // Update product quantity and order total
             $updateProductQuery = "UPDATE product SET in_stock = in_stock - :quantity WHERE id = :id";
             $updateProductStmt = $conn->prepare($updateProductQuery);
             $updateProductStmt->bindParam(':id', $id);
@@ -79,10 +78,8 @@ function addProduct($id, $user_id, $quantity)
             }
 
 
-            // Calculate the total price after discount
             $totalPrice = $quantity * ($productResult["price"] - ($productResult["price"] * $productResult["discount"] / 100));
             $totalPrice = round($totalPrice, 2);
-            // Update the order with the calculated total price
             $updateOrderQuery = "UPDATE orders SET cost = cost + :totalPrice, inTotal = inTotal + :totalPrice WHERE user_id = :user_id AND paid = 0";
             $updateOrderStmt = $conn->prepare($updateOrderQuery);
             $updateOrderStmt->bindParam(':user_id', $user_id);

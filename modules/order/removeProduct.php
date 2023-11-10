@@ -21,7 +21,7 @@ function removeProduct($userId, $productId)
             }
 
             $quantityQuery = "SELECT productordermapping.quantity, product.price, product.discount FROM productordermapping JOIN product ON productordermapping.product_id = product.id WHERE order_id = :order_id AND product_id = :product_id";
-            $quantityStmt = $conn->prepare($quantityQuery); // Corrected variable name
+            $quantityStmt = $conn->prepare($quantityQuery);
             $quantityStmt->bindParam(':order_id', $orderResult['id']);
             $quantityStmt->bindParam(':product_id', $productId);
             $quantityStmt->execute();

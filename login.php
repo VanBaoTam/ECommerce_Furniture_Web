@@ -26,7 +26,7 @@
             }
             document.addEventListener('DOMContentLoaded', function () {
 
-                  var loginForm = document.getElementById('login-form');
+                  let loginForm = document.getElementById('login-form');
 
                   loginForm.addEventListener('submit', function (event) {
                         event.preventDefault();
@@ -141,7 +141,7 @@
                               console.error("Error:", error);
                         });
 
-                  return false; // Ensure the form doesn't submit
+                  return false;
             }
       </script>
       <footer>

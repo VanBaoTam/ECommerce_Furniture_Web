@@ -21,7 +21,20 @@
      <link rel="stylesheet" href="assets/css/fontawesome.css">
      <link rel="stylesheet" href="assets/css/style.css">
      <link rel="stylesheet" href="assets/css/owl.css">
+     <script>
+          if (window.history.replaceState) {
+               window.history.replaceState(null, null, window.location.href);
+          }
+          document.addEventListener('DOMContentLoaded', function () {
 
+               let loginForm = document.getElementById('confirm-form');
+
+               loginForm.addEventListener('submit', function (event) {
+                    event.preventDefault();
+
+               });
+          });
+     </script>
 </head>
 
 <body>
@@ -84,7 +97,7 @@
                </div>
                <div class="inner-content">
                     <div class="contact-form">
-                         <form action="#">
+                         <form id="confirm-form" action="" method="POST" onsubmit="return handleSubmit(event);">
                               <p style="font-sie:40px;color:tomato;font-weight:bold;">Only write down the form below if
                                    you
                                    want to give us
@@ -111,36 +124,27 @@
                                              <input type="text" name="alter-postal" class="form-control">
                                         </div>
                                    </div>
+                                   <input type="hidden" name="id" id="idInput" />
                                    <div class="col-sm-6 col-xs-12">
                                         <div class="form-group">
                                              <label class="control-label">Payment method</label>
 
                                              <select class="form-control" name="method">
-                                                  <option value="">-- Choose --</option>
-                                                  <option value="bank">Bank account</option>
-                                                  <option value="cash">Cash</option>
-                                                  <option value="paypal">PayPal</option>
+                                                  <option disabled>-- Choose --</option>
+                                                  <option value="VISA">VISA</option>
+                                                  <option value="COD">Cash</option>
+                                                  <option value="Paypal">PayPal</option>
                                              </select>
                                         </div>
                                    </div>
                               </div>
-
-                              <div class="row">
-                                   <div class="col-sm-12 col-xs-12">
-                                        <div class="form-group">
-                                             <label class="control-label">Captcha</label>
-                                             <input type="text" name="captcha" class="form-control">
-                                        </div>
-                                   </div>
-                              </div>
-
                               <div class="form-group">
                                    <label class="control-label">
                                         <input type="checkbox" name="terms">
                                         I agree with the <a href="terms.php" target="_blank">Terms &amp; Conditions</a>
                                    </label>
                               </div>
-
+                              <div id="confirm-response"></div>
                               <div class="clearfix">
                                    <button type="button" class="filled-button pull-left">Back</button>
 
@@ -165,10 +169,43 @@
           </div>
      </footer>
      <script>
-          var id = sessionStorage.getItem('id');
-          var name = sessionStorage.getItem('name');
+          let id = sessionStorage.getItem('id');
+          let name = sessionStorage.getItem('name');
           if (!id || !name) {
                window.location.href = 'login.php';
+          }
+          document.getElementById('idInput').value = id;
+     </script>
+     <script>
+          function handleSubmit(event) {
+               event.preventDefault();
+               fetch('./modules/order/handleConfirmOrder.php', {
+                    method: 'POST',
+                    body: new FormData(event.target)
+               })
+                    .then(response => {
+                         if (!response.ok) {
+                              throw new Error('Network response was not ok');
+                         }
+                         return response.json();
+                    })
+                    .then(data => {
+                         if (data.code === "200") {
+                              let resp = document.getElementById("confirm-response");
+                              resp.innerHTML = `<p style="color: green;">${data.message}</p>`;
+                              setTimeout(() => {
+                                   window.location.reload();
+                              }, 5000);
+                         } else {
+                              let resp = document.getElementById("confirm-response");
+                              resp.innerHTML = `<p style="color: red;">${data.message}</p>`;
+                         }
+                    })
+                    .catch(error => {
+                         console.error("Error:", error);
+                    });
+
+               return false;
           }
      </script>
      <script>
@@ -183,7 +220,6 @@
                     })
                          .then(response => response.json())
                          .then(data => {
-                              console.log(data);
                               if (data.length > 0) {
                                    let costFixed = Number((data[0].cost)).toFixed(2);
                                    let totalFixed = Number((data[0].inTotal)).toFixed(2);
@@ -359,7 +395,7 @@
                          console.error("Error:", error);
                     });
 
-               return false; // Ensure the form doesn't submit
+               return false;
           }
 
      </script>

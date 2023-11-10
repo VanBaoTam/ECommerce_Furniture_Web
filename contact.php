@@ -26,7 +26,7 @@
     }
     document.addEventListener('DOMContentLoaded', function () {
 
-      var loginForm = document.getElementById('contact-form');
+      let loginForm = document.getElementById('contact-form');
 
       loginForm.addEventListener('submit', function (event) {
         event.preventDefault();
@@ -152,8 +152,8 @@
             </form>
 
             <script>
-              var id = sessionStorage.getItem('id');
-              var name = sessionStorage.getItem('name');
+              let id = sessionStorage.getItem('id');
+              let name = sessionStorage.getItem('name');
               if (!id || !name) {
                 window.location.href = 'login.php';
               }
@@ -189,7 +189,7 @@
                 console.error("Error:", error);
               });
 
-            return false; // Ensure the form doesn't submit
+            return false; 
           }
         </script>
       </div>

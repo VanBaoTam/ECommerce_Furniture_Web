@@ -24,7 +24,7 @@
     }
     document.addEventListener('DOMContentLoaded', function () {
 
-      var loginForm = document.getElementById('order-form');
+      let loginForm = document.getElementById('order-form');
 
       loginForm.addEventListener('submit', function (event) {
         event.preventDefault();
@@ -129,7 +129,6 @@
           return response.json();
         })
         .then(data => {
-          console.log(data);
           if (data.code === "200") {
             let resp = document.getElementById("order-response");
             resp.innerHTML = `<p style="color: green;">${data.message}</p>`;
@@ -142,7 +141,7 @@
           console.error("Error:", error);
         });
 
-      return false; // Ensure the form doesn't submit
+      return false; 
     }
   </script>
 

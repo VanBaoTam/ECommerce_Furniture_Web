@@ -4,7 +4,7 @@ function SignUp($email, $password, $name, $birthday, $phone, $postal, $address)
 {
       require_once(__DIR__ . '/../database/conn.php');
 
-      // Validation
+
       if (
             !preg_match('/^(?=.{8,50}$)[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/', $email) ||
             !preg_match('/^.{8,50}$/', $password) ||
@@ -31,7 +31,7 @@ function SignUp($email, $password, $name, $birthday, $phone, $postal, $address)
                   return json_encode($response);
             }
 
-            // Use prepared statements to prevent SQL injection
+
             $query = "INSERT INTO user (email, password, name, date_of_birth, phone_number, zip_postal, address) VALUES (:email, :password, :name, :date_of_birth, :phone_number, :zip_postal, :address)";
             $stmt = $conn->prepare($query);
             $stmt->bindParam(':email', $email);

@@ -9,7 +9,7 @@ function fetchingCart($id, $name)
             return json_encode($response);
       }
       try {
-            // Use prepared statements to prevent SQL injection
+
             $query = "SELECT id, name FROM user WHERE id = :id and name = :name";
             $stmt = $conn->prepare($query);
             $stmt->bindParam(':id', $id);

@@ -2,7 +2,7 @@
 
 function login($email, $password)
 {
-      // Validation
+
       if (!preg_match('/^(?=.{8,50}$)[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/', $email)) {
             $response = array("code" => "400", "message" => "Invalid email or password");
             return json_encode($response);
@@ -15,7 +15,7 @@ function login($email, $password)
 
       require_once(__DIR__ . '/../database/conn.php');
       try {
-            // Use prepared statements to prevent SQL injection
+
             $query = "SELECT id, name FROM user WHERE email = :email and password = :password";
             $stmt = $conn->prepare($query);
             $stmt->bindParam(':email', $email);
