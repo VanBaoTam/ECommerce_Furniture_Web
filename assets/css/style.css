@@ -1036,6 +1036,7 @@ footer .inner-content p a {
 	padding:1rem;
 	border:1px solid #333;
 	margin-bottom: 1rem;
+	justify-content: space-around;
 }
 .dashboard-product-downcontent{
  padding: 1rem;

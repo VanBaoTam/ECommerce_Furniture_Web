@@ -2,14 +2,14 @@
 require_once(__DIR__ . '/../database/conn.php');
 
 try {
-      $query = "SELECT product.id,product.name,product.price,product.discount,product.in_stock,product.description,image FROM product JOIN images ON product.id = images.product_id";
-      $stmt = $conn->query($query);
-      $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-      foreach ($result as $ele) {
-            $imageData = base64_encode($ele['image']);
-            $imageSrc = 'data:image/jpeg;base64,' . $imageData;
-            $discount = $ele['price'] - ($ele['discount'] * $ele['price'] / 100);
-            echo '  <div class="col-md-12">
+  $query = "SELECT product.id,product.name,product.price,product.discount,product.in_stock,product.description,image FROM product JOIN images ON product.id = images.product_id";
+  $stmt = $conn->query($query);
+  $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  foreach ($result as $ele) {
+    $imageData = base64_encode($ele['image']);
+    $imageSrc = 'data:image/jpeg;base64,' . $imageData;
+    $discount = $ele['price'] - ($ele['discount'] * $ele['price'] / 100);
+    echo '  <div class="col-md-12">
             <div class="dashboard-product">
               <a href="product-details.php?id=' . $ele['id'] . '"><img src="' . $imageSrc . '" alt="" style="height:150px;width:160px"></a>
               <div class="dashboard-product-downcontent">
@@ -19,11 +19,14 @@ try {
                 <h6><small><del>$' . $ele['price'] . '</del></small> $' . $discount . '</h6>
                 <p>' . $ele['description'] . '</p>
               </div>
+              <div class="dashboard-product-downcontent" style="float:right">
+              <a href="product-manage.php?id=' . $ele['id'] . '"><button > Manage  </button></a>
+            </div>
             </div>
           </div>';
-      }
+  }
 
 } catch (PDOException $e) {
-      echo "<script>console.log('[$timestamp]: FETCHING FAILED. Error: " . $e->getMessage() . "' );</script>";
+  echo "<script>console.log('[$timestamp]: FETCHING FAILED. Error: " . $e->getMessage() . "' );</script>";
 }
 ?>
