@@ -30,6 +30,16 @@ function SignUp($email, $password, $name, $birthday, $phone, $postal, $address)
                   $response = array("code" => "400", "message" => "Email already exists");
                   return json_encode($response);
             }
+            $query = "SELECT * FROM user WHERE phone_number = :phone";
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(':phone', $phone);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($result) {
+                  $response = array("code" => "400", "message" => "Phone number already exists");
+                  return json_encode($response);
+            }
 
 
             $query = "INSERT INTO user (email, password, name, date_of_birth, phone_number, zip_postal, address) VALUES (:email, :password, :name, :date_of_birth, :phone_number, :zip_postal, :address)";

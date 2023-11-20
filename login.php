@@ -129,14 +129,13 @@
                         })
                         .then(data => {
                               if (data.id && data.name) {
-                                    if (data.role) {
-                                          sessionStorage.setItem("id", data.id);
-                                          sessionStorage.setItem("name", data.name);
+                                    sessionStorage.setItem("id", data.id);
+                                    sessionStorage.setItem("name", data.name);
+                                    sessionStorage.setItem("token", data.role);
+                                    if (data.role === "1") {
                                           window.location.href = "dashboard.php";
                                     }
                                     else {
-                                          sessionStorage.setItem("id", data.id);
-                                          sessionStorage.setItem("name", data.name);
                                           window.location.href = "index.php";
                                     }
                               } else {

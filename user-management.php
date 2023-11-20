@@ -8,7 +8,6 @@
       <meta name="description" content="">
       <meta name="author" content="">
       <link rel="icon" href="assets/images/favicon.ico">
-
       <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
             rel="stylesheet">
 
@@ -21,23 +20,16 @@
       <link rel="stylesheet" href="assets/css/fontawesome.css">
       <link rel="stylesheet" href="assets/css/style.css">
       <link rel="stylesheet" href="assets/css/owl.css">
+      <script>
+      </script>
 
 </head>
 
 <body>
 
-      <!-- ***** Preloader Start ***** -->
-      <div id="preloader">
-            <div class="jumper">
-                  <div></div>
-                  <div></div>
-                  <div></div>
-            </div>
-      </div>
-      <!-- ***** Preloader End ***** -->
 
       <!-- Header -->
-      <header class="">
+      <header style="overflow: hidden; position: fixed;  top: 0;  width: 100%; ">
             <nav class="navbar navbar-expand-lg">
                   <div class="container">
                         <a class="navbar-brand" href="index.php">
@@ -56,32 +48,28 @@
                   </div>
             </nav>
       </header>
+      <div class="latest-products">
+            <div class="container">
+                  <div class="row">
+                        <?php
+                        include("./modules/products/user-fetching.php");
+                        ?>
+                  </div>
+
+
+            </div>
+      </div>
       <footer>
             <div class="container">
                   <div class="row">
                         <div class="col-md-12">
                               <div class="inner-content">
-                                    <p>
-                                          Copyright © 2023 Chairable Company </p>
+                                    <p>Copyright © 2023 Chairable Company </p>
                               </div>
                         </div>
                   </div>
             </div>
       </footer>
-
-      <script>
-            let id = sessionStorage.getItem('id');
-            let name = sessionStorage.getItem('name');
-            let role = sessionStorage.getItem('token');
-            if (!id || !name) {
-                  window.location.href = 'login.php';
-            }
-            if (role !== "1") {
-                  window.location.href = 'index.php';
-            }
-            document.getElementById('idInput').value = id;
-            document.getElementById('nameInput').value = name;
-      </script>
       <!-- Bootstrap core JavaScript -->
       <script src="vendor/jquery/jquery.min.js"></script>
       <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
