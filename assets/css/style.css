@@ -1029,7 +1029,19 @@ footer .inner-content p a {
   .btn-danger:hover {
 	background-color: #bd2130;
   }
-  
+
+.dashboard-product {
+	display: flex;
+	width: 100%;
+	padding:1rem;
+	border:1px solid #333;
+	margin-bottom: 1rem;
+}
+.dashboard-product-downcontent{
+ padding: 1rem;
+ margin-left: 2rem;
+ border-left:1px solid gray;
+}
 /* Responsive Style */
 @media (max-width: 768px) {
 	.banner .text-content {

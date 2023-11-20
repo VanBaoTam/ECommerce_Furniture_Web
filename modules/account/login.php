@@ -16,14 +16,14 @@ function login($email, $password)
       require_once(__DIR__ . '/../database/conn.php');
       try {
 
-            $query = "SELECT id, name FROM user WHERE email = :email and password = :password";
+            $query = "SELECT id, name, role FROM user WHERE email = :email and password = :password";
             $stmt = $conn->prepare($query);
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':password', $password);
             $stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($result) {
-                  $response = array("code" => "200", "message" => "Login successfully", "id" => $result["id"], "name" => $result["name"]);
+                  $response = array("code" => "200", "message" => "Login successfully", "id" => $result["id"], "name" => $result["name"], "role" => $result["role"]);
                   return json_encode($response);
             } else {
                   $response = array("code" => "404", "message" => "Account's Credential not found");

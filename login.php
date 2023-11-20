@@ -129,9 +129,16 @@
                         })
                         .then(data => {
                               if (data.id && data.name) {
-                                    sessionStorage.setItem("id", data.id);
-                                    sessionStorage.setItem("name", data.name);
-                                    window.location.href = "index.php";
+                                    if (data.role) {
+                                          sessionStorage.setItem("id", data.id);
+                                          sessionStorage.setItem("name", data.name);
+                                          window.location.href = "dashboard.php";
+                                    }
+                                    else {
+                                          sessionStorage.setItem("id", data.id);
+                                          sessionStorage.setItem("name", data.name);
+                                          window.location.href = "index.php";
+                                    }
                               } else {
                                     let resp = document.getElementById("login-response");
                                     resp.innerHTML = `<p style="color: red;">${data.message}</p>`;

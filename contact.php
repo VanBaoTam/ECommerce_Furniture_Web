@@ -25,12 +25,9 @@
       window.history.replaceState(null, null, window.location.href);
     }
     document.addEventListener('DOMContentLoaded', function () {
-
       let loginForm = document.getElementById('contact-form');
-
       loginForm.addEventListener('submit', function (event) {
         event.preventDefault();
-
       });
     });
   </script>
@@ -189,7 +186,7 @@
                 console.error("Error:", error);
               });
 
-            return false; 
+            return false;
           }
         </script>
       </div>
