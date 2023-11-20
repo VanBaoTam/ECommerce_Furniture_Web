@@ -61,7 +61,7 @@
             <div class="container">
                   <div class="row">
                         <?php
-                        include("./modules/products/product-fetching.php");
+                        include("./modules/admin/product-fetching.php");
                         ?>
                   </div>
 

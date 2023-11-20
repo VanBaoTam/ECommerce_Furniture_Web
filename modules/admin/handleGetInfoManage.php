@@ -1,12 +1,12 @@
 a
 <?php
 if (isset($_GET["id"])) {
-  require_once("getDetail.php");
+  require_once(__DIR__ . '/../products/getDetail.php');
   $result = getDetail($_GET["id"]);
   if (!empty($result)) {
     $product = $result;
     echo '<div class="products">
-            <div class="container">
+            <div class="container"> 
               <div class="row">
                 <div class="col-md-4 col-xs-12">
                   <div>

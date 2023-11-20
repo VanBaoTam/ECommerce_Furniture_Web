@@ -2,7 +2,7 @@
 require_once(__DIR__ . '/../database/conn.php');
 
 try {
-  $query = "SELECT product.id,product.name,product.price,product.discount,product.in_stock,product.description,image FROM product JOIN images ON product.id = images.product_id";
+  $query = "SELECT product.id,product.name,product.price,product.discount,product.in_stock as inStock,product.description,image FROM product JOIN images ON product.id = images.product_id";
   $stmt = $conn->query($query);
   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
   foreach ($result as $ele) {
@@ -16,7 +16,8 @@ try {
                 <a href="product-details.php?id=' . $ele['id'] . '">
                   <h4>' . $ele['name'] . '</h4>
                 </a>
-                <h6><small><del>$' . $ele['price'] . '</del></small> $' . $discount . '</h6>
+                <h6>Price: <small><del>  $' . $ele['price'] . '</del></small> $' . $discount . '</h6>
+                <p>In stock:  ' . $ele['inStock'] . '</p>
                 <p>' . $ele['description'] . '</p>
               </div>
               <div class="dashboard-product-downcontent" style="float:right">
