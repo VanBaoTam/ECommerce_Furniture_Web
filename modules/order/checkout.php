@@ -10,7 +10,7 @@ function fetchingCart($id, $name)
       }
       try {
 
-            $query = "SELECT id, name FROM user WHERE id = :id and name = :name";
+            $query = "SELECT id, name FROM user WHERE id = :id and name = :name and status ='activated'";
             $stmt = $conn->prepare($query);
             $stmt->bindParam(':id', $id);
             $stmt->bindParam(':name', $name);

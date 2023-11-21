@@ -16,7 +16,7 @@ function login($email, $password)
       require_once(__DIR__ . '/../database/conn.php');
       try {
 
-            $query = "SELECT id, name, role FROM user WHERE email = :email and password = :password";
+            $query = "SELECT id, name, role FROM user WHERE email = :email and password = :password and status ='activated'";
             $stmt = $conn->prepare($query);
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':password', $password);
@@ -26,7 +26,7 @@ function login($email, $password)
                   $response = array("code" => "200", "message" => "Login successfully", "id" => $result["id"], "name" => $result["name"], "role" => $result["role"]);
                   return json_encode($response);
             } else {
-                  $response = array("code" => "404", "message" => "Account's Credential not found");
+                  $response = array("code" => "404", "message" => "Account's Credential not found or your account is deactivated by admin");
                   return json_encode($response);
             }
       } catch (PDOException $e) {

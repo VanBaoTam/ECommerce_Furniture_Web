@@ -59,6 +59,35 @@
 
             </div>
       </div>
+      <script>
+            function handleSubmit(id) {
+                  let formData = new FormData();
+                  formData.append('id', id);
+                  fetch('./modules/admin/handleRemoveUser.php', {
+                        method: 'POST',
+                        body: formData
+                  })
+                        .then(response => {
+                              if (!response.ok) {
+                                    throw new Error('Network response was not ok');
+                              }
+                              return response.json();
+                        })
+                        .then(data => {
+                              if (data.code === "200") {
+                                    let resp = document.getElementById("remove-response");
+                                    resp.innerHTML = `<p style="color: green;">${data.message}</p>`;
+                              } else {
+                                    let resp = document.getElementById("remove-response");
+                                    resp.innerHTML = `<p style="color: red;">${data.message}</p>`;
+                              }
+                        })
+                        .catch(error => {
+                              console.error("Error:", error);
+                        });
+            }
+      </script>
+
       <footer>
             <div class="container">
                   <div class="row">

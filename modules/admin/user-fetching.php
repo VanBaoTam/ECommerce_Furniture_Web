@@ -2,7 +2,7 @@
 require_once(__DIR__ . '/../database/conn.php');
 
 try {
-      $query = "SELECT * FROM user";
+      $query = "SELECT * FROM user WHERE status ='activated'";
       $stmt = $conn->query($query);
       $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
       $admin = array();
@@ -17,6 +17,7 @@ try {
       echo "<div class='container'>";
       echo "<div class='row'>";
       echo "<div class='col-md-12'>";
+      echo '<div id="remove-response"></div>';
       echo "<h3> ADMIN </h3>";
       foreach ($admin as $user) {
             echo '<div class="card mb-3">';
@@ -32,8 +33,8 @@ try {
                   }
             }
             echo ' <div class="mb-2" style="width: 200px;">
-           <button> Delete</button>
-        </div>';
+                <button class="btn btn-secondary" style="float:right;margin-right:5rem" onClick="handleSubmit(' . $user["id"] . ')" id="deleteBtn">DELETE</button>
+            </div>';
             echo '</div>';
             echo '</div>';
       }
@@ -56,9 +57,10 @@ try {
                 ';
                   }
             }
+
             echo ' <div class="mb-2" style="width: 200px;">
-           <button> Delete</button>
-        </div>';
+                <button class="btn btn-secondary" style="float:right;margin-right:5rem" onClick="handleSubmit(' . $user["id"] . ')" id="deleteBtn">DELETE</button>
+            </div>';
             echo '</div>';
             echo '</div>';
       }

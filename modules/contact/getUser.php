@@ -4,7 +4,7 @@ function getUser($id, $name)
       require_once(__DIR__ . '/../database/conn.php');
 
       try {
-            $query = "SELECT id FROM user WHERE id = :id and name = :name";
+            $query = "SELECT id FROM user WHERE id = :id and name = :name and status ='activated'";
             $stmt = $conn->prepare($query);
             $stmt->bindParam(':id', $id);
             $stmt->bindParam(':name', $name);
