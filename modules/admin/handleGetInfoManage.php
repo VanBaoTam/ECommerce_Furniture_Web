@@ -37,8 +37,9 @@ if (isset($_GET["id"])) {
                       <div>
                         <div>
                           <div class="col-md-12">
+                          <div style="margin-left:10rem;" id="remove-response"></div>
                           <button class="btn btn-primary" type="submit"style="margin-left:2rem" >Apply</button>
-                          <button class="btn btn-secondary" type="submit" style="margin-left:28rem">Delete</button>
+<button class="btn btn-secondary" style="float:right;margin-right:5rem" onClick="handleSubmit(event)" id="deleteBtn">DELETE</button></td>
                           </div>
                           <div class="col-sm-8">
                           <div id="manage-response"></div>
@@ -67,13 +68,13 @@ if (isset($_GET["id"])) {
                 <div class="col-md-8 col-xs-12">
                     <h2>Product Not Found</h2>
                   <br>
-                  <a href="products.php" style="font-size:30px">Go back</a>
+                  <a href="product-management.php" style="font-size:30px">Go back</a>
                 </div>
               </div>
             </div>
           </div>';
   }
 } else {
-  echo '<script> window.location.href = "products.php";</script>';
+  echo '<script> window.location.href = "product-management.php";</script>';
 }
 ?>

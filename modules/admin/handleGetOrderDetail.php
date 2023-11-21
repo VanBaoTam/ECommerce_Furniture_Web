@@ -43,7 +43,7 @@ if (isset($_GET["id"])) {
     echo '</table>';
     echo '<div style="margin-left:10rem;" id="remove-response">
     </div>';
-    echo '<td><button class="btn-secondary" style="float:right;margin-right:5rem" onClick="handleSubmit(event)" id="deleteBtn">DELETE</button></td>';
+    echo '<td><button class="btn btn-secondary" style="float:right;margin-right:5rem" onClick="handleSubmit(event)" id="deleteBtn">DELETE</button></td>';
 
     ;
   } else {
