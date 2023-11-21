@@ -46,7 +46,7 @@ try {
 
             }
             echo ' <div class="mb-2" style="width: 200px;">
-           <button> Manage</button>
+           <a href="orders-manage.php?id=' . $order["id"] . '"><button> Manage</button></a>
         </div>';
             echo '</div>';
             echo '</div>';

@@ -51,6 +51,18 @@
                   </div>
             </nav>
       </header>
+      <div class="page-heading about-heading header-text" style="background-image: url(assets/images/heading.jpg);">
+            <div class="container">
+                  <div class="row">
+                        <div class="col-md-12">
+                              <div class="text-content">
+                                    <h4>Let's decorate your house!</h4>
+                                    <h2>Product Details</h2>
+                              </div>
+                        </div>
+                  </div>
+            </div>
+      </div>
       <?php
       include("./modules/admin/handleGetInfoManage.php");
       ?>

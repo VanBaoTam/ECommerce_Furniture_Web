@@ -1,11 +1,10 @@
-a
 <?php
 if (isset($_GET["id"])) {
   require_once(__DIR__ . '/../products/getDetail.php');
   $result = getDetail($_GET["id"]);
   if (!empty($result)) {
     $product = $result;
-    echo '<div class="products">
+    echo '<div class="products" style="margin-top:50px">
             <div class="container"> 
               <div class="row">
                 <div class="col-md-4 col-xs-12">
