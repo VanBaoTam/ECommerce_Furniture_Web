@@ -68,15 +68,14 @@
       ?>
       <script>
             function handleSubmit(event) {
-                  event.preventDefault(); // Prevents the default form submission behavior
-
                   let url = new URL(window.location.href);
                   let id = url.searchParams.get("id");
-                  let formData = new FormData();
-                  formData.append('id', id);
+                  document.getElementById('idInput').value = id;
+                  console.log(id);
+                  event.preventDefault();
                   fetch('./modules/admin/handleRemoveOrder.php', {
                         method: 'POST',
-                        body: formData
+                        body: new FormData(event.target)
                   })
                         .then(response => {
                               if (!response.ok) {
@@ -86,10 +85,10 @@
                         })
                         .then(data => {
                               if (data.code === "200") {
-                                    let resp = document.getElementById("remove-response");
+                                    let resp = document.getElementById("adjust-response");
                                     resp.innerHTML = `<p style="color: green;">${data.message}</p>`;
                               } else {
-                                    let resp = document.getElementById("remove-response");
+                                    let resp = document.getElementById("adjust-response");
                                     resp.innerHTML = `<p style="color: red;">${data.message}</p>`;
                               }
                         })
@@ -97,6 +96,8 @@
                               console.error("Error:", error);
                         });
             }
+
+
 
 
       </script>

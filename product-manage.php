@@ -68,8 +68,36 @@
       ?>
       <script>
             function handleSubmit(event) {
-                  event.preventDefault(); // Prevents the default form submission behavior
-
+                  event.preventDefault();
+                  let url = new URL(window.location.href);
+                  let id = url.searchParams.get("id");
+                  document.getElementById("idInput").value = id;
+                  console.log("Form Data:", new FormData(event.target));
+                  fetch('./modules/admin/handleUpdateProduct.php', {
+                        method: 'POST',
+                        body: new FormData(event.target)
+                  })
+                        .then(response => {
+                              if (!response.ok) {
+                                    throw new Error('Network response was not ok');
+                              }
+                              return response.json();
+                        })
+                        .then(data => {
+                              if (data.code === "200") {
+                                    let resp = document.getElementById("adjust-response");
+                                    resp.innerHTML = `<p style="color: green;">${data.message}</p>`;
+                              } else {
+                                    let resp = document.getElementById("adjust-response");
+                                    resp.innerHTML = `<p style="color: red;">${data.message}</p>`;
+                              }
+                        })
+                        .catch(error => {
+                              console.error("Error:", error);
+                        });
+            }
+            function handleSubmitDelete(event) {
+                  event.preventDefault();
                   let url = new URL(window.location.href);
                   let id = url.searchParams.get("id");
                   let formData = new FormData();

@@ -12,43 +12,42 @@ if (isset($_GET["id"])) {
                     <img src="data:image/jpeg;base64,' . base64_encode($product['image']) . '" alt="" class="img-fluid wc-image">
                   </div>
                   <br>
-                  
                 </div>
-
                 <div class="col-md-8 col-xs-12">
-                  <form action="" id="order-form"  class="form" method="POST" onsubmit="return handleSubmit(event);">
+                  <form action="" id="order-form"  class="form" method="POST" enctype="multipart/form-data" onsubmit="return handleSubmit(event);">
                   <input type="hidden" name="id"  id="idInput" />
-                  <input type="hidden" name="userId"  id="userIdInput" />
                   <label>Name</label><br/>
-                    <input type="text"  placeholder="' . $product['name'] . '"></input><br/>
+                    <input type="text" name="productName"  placeholder="' . $product['name'] . '"></input><br/>
                     <br>
                     <label>Price</label><br/>
-                      <input type="number" min="0" placeholder="' . $product['price'] . '"</input> <br/><br/>
+                      <input type="number" name="productPrice" min="0" placeholder="' . $product['price'] . '"</input> <br/><br/>
                       <label>Discount</label><br/>
-                      <input type="number" min="0" placeholder="' . $product['discount'] . '"</input><br/><br/>
+                      <input type="number" min="0" max="100" name="productDiscount" placeholder="' . $product['discount'] . '"</input><br/><br/>
                       <label>Stock</label><br/>
-                      <input type="number" min="0" placeholder="' . $product['in_stock'] . '"</input> 
-                    <br><br/>
-                    <textarea name="description" placeholder="' . $product['description'] . '" rows="6" class="form-control" id="description" 
-                    required=""></textarea>
+                      <input type="number" name="productStock" min="0" placeholder="' . $product['in_stock'] . '"</input> 
+                    <br/><br/>
+                    <label for="productImages">Product Images</label><br/>
+    <input type="file" name="productImages[]" id="productImages" accept="image/*" multiple /><br><br/>
+                    <textarea name="description" name="productDescription" placeholder="' . $product['description'] . '" rows="6" class="form-control" id="description" 
+                    ></textarea>
                    
                     <br>
                     <div>
                       <div>
                         <div>
                           <div class="col-md-12">
+                          <div style="margin-left:10rem;" id="adjust-response"></div>
                           <div style="margin-left:10rem;" id="remove-response"></div>
-                          <button class="btn btn-primary" type="submit"style="margin-left:2rem" >Apply</button>
-<button class="btn btn-secondary" style="float:right;margin-right:5rem" onClick="handleSubmit(event)" id="deleteBtn">DELETE</button></td>
+                          <button class="btn btn-primary" type="submit" style="margin-left:2rem">Apply</button>
                           </div>
                           <div class="col-sm-8">
                           <div id="manage-response"></div>
                           </div>
-                         
                         </div>
                       </div>
                     </div>
                   </form>
+                  <button class="btn btn-secondary" type="button" style="margin-left:3rem; margin-top:1rem;" onClick="handleSubmitDelete(event)" id="deleteBtn">DELETE</button>
                 </div>
               </div>
             </div>
