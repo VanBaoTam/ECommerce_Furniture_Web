@@ -90,7 +90,7 @@ function addProduct($id, $user_id, $quantity)
             $response = array("code" => "200", "message" => "Product added to order successfully");
             return json_encode($response);
       } catch (PDOException $e) {
-            $response = array("code" => "500", "message" => $e->getMessage());
+            $response = array("code" => "500", "message" => "Error: Internal Server Error");
             return json_encode($response);
       }
 }

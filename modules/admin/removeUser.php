@@ -33,7 +33,7 @@ function deactivateUser($id)
                   return json_encode($response);
             }
       } catch (PDOException $e) {
-            $response = array("code" => "500", "message" => "Error deactivating user: " . $e->getMessage());
+            $response = array("code" => "500", "message" => "Error: Internal Server Error");
             return json_encode($response);
       }
 }

@@ -15,8 +15,7 @@ function getOrderDetail($id)
                   return null;
             }
       } catch (PDOException $e) {
-            // Log the error to the server-side console
-            echo "<script>console.log('FETCHING FAILED. Error: " . $e->getMessage() . "' );</script>";
+            echo '<script>console.log("FETCHING FAILED. Error: Internal Server Error");</script>';
       }
 }
 ?>

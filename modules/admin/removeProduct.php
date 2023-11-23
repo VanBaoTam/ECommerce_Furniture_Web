@@ -39,7 +39,7 @@ function removeProduct($id)
                   return json_encode($response);
             }
       } catch (PDOException $e) {
-            $response = array("code" => "500", "message" => "Error deleting product: " . $e->getMessage());
+            $response = array("code" => "500", "message" => "Error: Internal Server Error");
             return json_encode($response);
       }
 }

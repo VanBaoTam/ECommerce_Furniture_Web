@@ -1,4 +1,5 @@
 <?php
+
 function GetDetail($id)
 {
       require_once(__DIR__ . '/../database/conn.php');
@@ -9,12 +10,12 @@ function GetDetail($id)
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             if (count($result) > 0) {
-                  return $result[0];
+                  return $result;
             } else {
                   return null;
             }
       } catch (PDOException $e) {
-            echo "<script>console.log(FETCHING FAILED. Error: " . $e->getMessage() . "' );</script>";
+            echo '<script>console.log("FETCHING FAILED. Error: Internal Server Error");</script>';
       }
 }
 ?>

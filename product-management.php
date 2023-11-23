@@ -51,7 +51,7 @@
       <div class="latest-products">
             <div class="container">
                   <div class="row" style="margin-bottom:-4rem">
-                        <button>Add</button>
+                        <a href="product-adding.php"><button>Add</button></a>
                   </div>
 
 
