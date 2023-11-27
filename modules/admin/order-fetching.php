@@ -10,8 +10,16 @@ try {
       echo "<div class='col-md-12'>";
       echo "<h3> ORDERS </h3>";
       foreach ($result as $order) {
+
+            $query = "SELECT count(product_id) as total FROM php_excercise.productordermapping where order_id = :id";
+            $totalstmt = $conn->prepare($query);
+            $totalstmt->bindParam(':id', $order["id"]);
+            $totalstmt->execute();
+            $totalResult = $totalstmt->fetch(PDO::FETCH_ASSOC);
             echo '<div class="card mb-3">';
             echo '<div class="d-flex flex-row justify-content-between md-12" style="padding:1rem">';
+
+            $order["total"] = $totalResult["total"];
             foreach ($order as $key => $value) {
                   if ($key === "paid") {
                         if ($value === "1") {
@@ -33,7 +41,7 @@ try {
                         echo '
                         <div class="mb-2" style="width: 200px;">
                             <h6 class="card-title">' . ucwords(str_replace('_', ' ', $key)) . '</h6>
-                            <p class="card-text">' . $value . ' $  </p>
+                            <p class="card-text">' . $value . ' products </p>
                         </div>
                     ';
                   } else
@@ -57,6 +65,6 @@ try {
 
 
 } catch (PDOException $e) {
-      echo '<script>console.log("FETCHING FAILED. Error: Internal Server Error");</script>';
+      echo $e->getMessage();
 }
 ?>
