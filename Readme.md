@@ -1,4 +1,4 @@
-Web-app project about Furniture ecommerce using HTML CSS JS PHP (Pure, No frameworks).
+Project about Furniture ecommerce using HTML CSS JS PHP (No frameworks).
 
 ! OPEN SOURCE !
 ! THIS IS A PROJECT THAT I DID FOR EXCERCISE !
